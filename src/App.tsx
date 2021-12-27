@@ -4,7 +4,6 @@ import { Contact, contactsFromServer } from './api/contacts';
 import { CurrentContact } from './components/CurrentContact/CurrentContact';
 
 import { ContactsList } from './components/ContactsList/ContactsList';
-// eslint-disable-next-line import/named
 import { AddContact } from './components/AddContact/AddContact';
 
 const contactList = contactsFromServer.map((contact: Contact) => {
@@ -48,7 +47,7 @@ export class App extends React.Component<{}, State> {
         <div className="App__main-content">
           <div className="App__header">
             <h1 className="App__title">
-              Contacts book
+              {!addContact ? 'Contacts book' : 'Add contact'}
             </h1>
             <div className="App__count">
               count:
@@ -68,49 +67,42 @@ export class App extends React.Component<{}, State> {
             )}
           </div>
 
-          {addContact && (
-            <AddContact />
-          )}
-
-          {selectedContactId
+          {addContact
             ? (
-              <div>
-                <CurrentContact
-                  contact={contacts
-                    .find((contact: Contact) => contact.id === selectedContactId) || null}
-                />
-
-                <button
-                  type="button"
-                  className="button"
-                  onClick={() => {
-                    this.setState({ selectedContactId: 0 });
-                  }}
-                >
-                  To contacts
-                </button>
-              </div>
+              <AddContact />
             )
             : (
-              <ContactsList
-                contacts={contacts}
-                onSelectContactID={this.selectContact}
-                deleteContact={this.deleteContact}
-              />
+              <div>
+                {selectedContactId
+                  ? (
+                    <div>
+                      <CurrentContact
+                        contact={contacts
+                          .find((contact: Contact) => contact.id === selectedContactId) || null}
+                      />
+
+                      <button
+                        type="button"
+                        className="button"
+                        onClick={() => {
+                          this.setState({ selectedContactId: 0 });
+                        }}
+                      >
+                        To contacts
+                      </button>
+                    </div>
+                  )
+                  : (
+                    <ContactsList
+                      contacts={contacts}
+                      onSelectContactID={this.selectContact}
+                      deleteContact={this.deleteContact}
+                    />
+                  )}
+              </div>
             )}
 
         </div>
-
-        {/* <div className="App__content">
-          <div className="App__content-container">
-            {selectedContactId ? (
-              <CurrentContact
-                contactId={selectedContactId}
-                clearContactPage={this.onClear}
-              />
-            ) : 'No user selected'}
-          </div>
-        </div> */}
       </div>
     );
   }
