@@ -39,6 +39,20 @@ export class App extends React.Component<{}, State> {
     });
   };
 
+  addNewContact = (event: React.FormEvent<HTMLFormElement>, object: Contact) => {
+    event.preventDefault();
+
+    this.setState((state) => {
+      return {
+        contacts: [
+          ...state.contacts,
+          object,
+        ],
+        addContact: false,
+      };
+    });
+  };
+
   render() {
     const { selectedContactId, contacts, addContact } = this.state;
 
@@ -69,7 +83,22 @@ export class App extends React.Component<{}, State> {
 
           {addContact
             ? (
-              <AddContact />
+              <div>
+                <AddContact
+                  addNewContact={this.addNewContact}
+                  lengthContact={this.state.contacts.length}
+                />
+
+                <button
+                  type="button"
+                  className="button App__button"
+                  onClick={() => {
+                    this.setState({ addContact: false });
+                  }}
+                >
+                  Back to contacts
+                </button>
+              </div>
             )
             : (
               <div>

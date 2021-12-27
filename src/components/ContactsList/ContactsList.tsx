@@ -31,7 +31,7 @@ export class ContactsList extends React.Component<Props, {}> {
             {contacts.map((contact: Contact) => {
               return (
                 <li
-                  key={contact.id}
+                  key={contact.email}
                   className="ContactsList__item"
                 >
                   <div
