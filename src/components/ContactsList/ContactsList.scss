@@ -1,0 +1,51 @@
+.ContactsList {
+  width: 600px;
+
+  &__title {
+    color: rgba(0, 0, 255, .8);
+  }
+
+  &__user-button--selected {
+    background-color: #4d457b;
+  }
+
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0, 0, 255, .2);
+    position: relative;
+
+    &:hover {
+      box-shadow: 8px 8px 2px 1px rgba(0, 0, 255, .2);
+      cursor: pointer;
+    }
+  }
+
+  &__button {
+    background-color: #ffffff;
+    color: #ff3626;
+    border-radius: 10px;
+    border: 1px solid;
+
+    &:hover {
+      box-shadow: 1px 1px 2px 1px rgba(115, 115, 115, 0.2);
+      background-color: #ffb1a5;
+    }
+  }
+}
