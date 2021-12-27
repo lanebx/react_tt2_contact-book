@@ -68,6 +68,10 @@ export class App extends React.Component<{}, State> {
             )}
           </div>
 
+          {addContact && (
+            <AddContact />
+          )}
+
           {selectedContactId
             ? (
               <div>
